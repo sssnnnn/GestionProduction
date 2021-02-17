@@ -13,10 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
+Route::get('/', function () {
+    return view('auth.login');
+});
+Route::get('/dashboard', [App\Http\Controllers\CommandeController::class, 'index'])->name('home');
 Route::get('/articles',[App\Http\Controllers\ArticleController::class,'index']);
 Route::resource('articles', App\Http\Controllers\ArticleController::class);
 Route::get('/articles/{id}',[App\Http\Controllers\ArticleController::class,'getArticleById']);
@@ -31,3 +35,7 @@ Route::delete('/clients/{id}', [App\Http\Controllers\ClientController::class, 'd
 
 
 Route::resource('commandes',App\Http\Controllers\CommandeController::class);
+Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\CommandeController::class, 'index'])->name('home');

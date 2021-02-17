@@ -167,7 +167,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
-            <span class="ml-3 d-none d-lg-inline nav-profile-name ">Douglas McGee</span>
+            <span class="ml-3 d-none d-lg-inline nav-profile-name ">{{ Auth::user()->name }}</span>
             <i class="fas fa-angle-down ml-3"></i>
         </a>
         <!-- Dropdown - User Information -->
@@ -186,10 +186,17 @@
                 Activity Log
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+
+            <a class="dropdown-item" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 Logout
-            </a>
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
         </div>
     </li>
 
